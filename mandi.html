@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="mandi-style.css">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo">
+        <a href="index.html" style="color: white; text-decoration: none;">AgriAid — AI Farm Advisor</a>
+    </div>
+    
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="crop_doctor.html">Crop Doctor</a>
+        <a href="satellite.html">Satellite Advisor</a>
+        <a href="voice.html">Voice Assistant</a>
+        <a href="mandi.html">Mandi Optimizer</a>
+        <a href="pest_map.html">Pest Map</a>
+    </div>
+</nav>
+   
+    <div class="mandi-container">
+        <h1>💰 Mandi Optimizer</h1>
+        <div class="input-section">
+            <select id="cropSelect">
+                <option>Select Crop</option>
+                <option>Tomato</option>
+                <option>Onion</option>
+                <option>Rice</option>
+                <option>Maize</option>
+                <option>Potato</option>
+                <option>Chilli</option> 
+                <option>brinjal</option>
+                <option>Groundnuts</option>   
+                <option>Wheat</option>
+                        </select>
+            <button id="predictBtn">Predict Best Price</button>
+        </div>
+        
+        <div id="mandiResult" class="hidden">
+            <div class="price-card">
+                <h3>Current Price: <span id="currPrice">₹2,400/q</span></h3>
+                <h2 class="trend-up">Predicted Price: <span id="predPrice">₹2,850/q</span></h2>
+                <p><strong>Advice:</strong> Hold for 10 days for 15% more profit.</p>
+          
+    </div>
+    <script src="mandi-script.js"></script>
+</body>
+</html>
+<style>
+    .navbar {
+    background-color: #0b240b; /* Dark green from your mockup */
+    display: flex;
+    justify-content: space-between; /* Puts Logo on left, Links on right */
+    align-items: center;
+    padding: 15px 50px;
+    color: white;
+    position: fixed; /* Keeps it at the top when you scroll */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px; /* Space between each link */
+    margin-right: auto; /* This trick pushes the links toward the center */
+    margin-left: auto;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 5px 10px;
+}
+
+.nav-links a:hover {
+    color: #a3c18c; /* Light green hover effect */
+    border-bottom: 2px solid white; /* Matches the white line in your mockup */
+}
+    body { background: #fdfcf0; font-family: sans-serif; display: flex; justify-content: center; padding: 50px; }
+.mandi-container { background: white; padding: 30px; border-radius: 15px; border: 2px solid #e9c46a; box-shadow: 0 10px 20px rgba(0,0,0,0.05); width: 450px; text-align: center; }
+.input-section { margin: 20px 0; }
+select, button { padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+#predictBtn { background: #e76f51; color: white; border: none; cursor: pointer; }
+.price-card { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; }
+.trend-up { color: #2a9d8f; }
+.mandi-img { width: 100%; border-radius: 10px; margin-top: 20px; }
+.hidden { display: none; }
+</style>
+<script>
+    document.getElementById('predictBtn').addEventListener('click', function() {
+    document.getElementById('mandiResult').classList.remove('hidden');
+});
+</script>

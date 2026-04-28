@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant - AgriAid</title>
+    <link rel="stylesheet" href="voice-style.css">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo">
+        <a href="index.html" style="color: white; text-decoration: none;">AgriAid — AI Farm Advisor</a>
+    </div>
+    
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="crop_doctor.html">Crop Doctor</a>
+        <a href="satellite.html">Satellite Advisor</a>
+        <a href="voice.html">Voice Assistant</a>
+        <a href="mandi.html">Mandi Optimizer</a>
+        <a href="pest_map.html">Pest Map</a>
+    </div>
+</nav>
+    <div class="voice-container">
+        <header>
+            <button class="back-btn" onclick="window.close()">✕ Close</button>
+            <h1>AgriAid Voice</h1>
+        </header>
+
+        <main class="voice-main">
+            <div class="status-text" id="status">Tap the mic to ask a question...</div>
+            
+            <div class="mic-section">
+                <div class="pulse-ring" id="pulse"></div>
+                <button class="mic-btn" id="micBtn">
+                    <img src="images/voice.jpg" alt="Microphone">
+                </button>
+            </div>
+
+            <div class="transcript-area">
+                <div class="label">You said:</div>
+                <div class="message user" id="userSpeech">...</div>
+                
+                <div class="label">Assistant:</div>
+                <div class="message ai" id="aiResponse">I am listening. Ask me about weather, crop prices, or pest alerts.</div>
+            </div>
+        </main>
+    </div>
+    <script src="voice-script.js"></script>
+</body>
+</html>
+<style>
+    .navbar {
+    background-color: #0b240b; /* Dark green from your mockup */
+    display: flex;
+    justify-content: space-between; /* Puts Logo on left, Links on right */
+    align-items: center;
+    padding: 15px 50px;
+    color: white;
+    position: fixed; /* Keeps it at the top when you scroll */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px; /* Space between each link */
+    margin-right: auto; /* This trick pushes the links toward the center */
+    margin-left: auto;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 5px 10px;
+}
+
+.nav-links a:hover {
+    color: #a3c18c; /* Light green hover effect */
+    border-bottom: 2px solid white; /* Matches the white line in your mockup */
+}
+    body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background: #f0f4f0; 
+    margin: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+.voice-container { 
+    background: white; 
+    width: 100%; 
+    max-width: 400px; 
+    height: 90vh; 
+    border-radius: 30px; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+header { 
+    padding: 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    background: #1a3d1a; 
+    color: white; 
+}
+
+.back-btn { background: none; border: none; color: white; cursor: pointer; font-size: 1rem; }
+
+.voice-main { 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 40px 20px; 
+}
+
+.status-text { color: #588157; margin-bottom: 50px; font-weight: 600; text-align: center; }
+
+/* Pulse Animation */
+.mic-section { position: relative; margin-bottom: 50px; }
+
+.mic-btn { 
+    width: 110px; height: 110px; 
+    border-radius: 50%; border: none; 
+    background: #588157; cursor: pointer; 
+    position: relative; z-index: 2; 
+    overflow: hidden; padding: 0;
+}
+.mic-btn img { width: 100%; height: 100%; object-fit: cover; }
+
+.pulse-ring { 
+    position: absolute; width: 110px; height: 110px; 
+    background: #588157; border-radius: 50%; 
+    z-index: 1; opacity: 0; 
+}
+
+.pulsing { animation: pulse-animation 1.5s infinite; }
+
+@keyframes pulse-animation {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+/* Transcript Styles */
+.transcript-area { width: 100%; margin-top: 20px; }
+.label { font-size: 0.7rem; font-weight: bold; color: #888; text-transform: uppercase; margin-bottom: 5px; margin-left: 10px; }
+.message { padding: 15px; border-radius: 15px; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.4; }
+.user { background: #e9f5e9; color: #1a3d1a; border: 1px solid #c8e6c9; }
+.ai { background: #588157; color: white; box-shadow: 0 4px 10px rgba(88, 129, 87, 0.3); }
+</style>
+<script>
+    const micBtn = document.getElementById('micBtn');
+const pulse = document.getElementById('pulse');
+const statusText = document.getElementById('status');
+const userSpeech = document.getElementById('userSpeech');
+const aiResponse = document.getElementById('aiResponse');
+
+// Step 1: Check if the browser can hear you
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-IN'; // Sets language to English (India)
+
+    micBtn.addEventListener('click', () => {
+        recognition.start();
+        pulse.classList.add('pulsing');
+        statusText.innerText = "Listening closely...";
+    });
+
+    // Step 2: What happens when you finish speaking
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        userSpeech.innerText = transcript;
+        pulse.classList.remove('pulsing');
+        statusText.innerText = "Thinking...";
+        
+        // Step 3: Simulate AI Response (You can connect this to Gemini/Flask later)
+        setTimeout(() => {
+            statusText.innerText = "Assistant Replied";
+            aiResponse.innerText = "The current Mandi price for Tomatoes is ₹2,400 per quintal. Prices are expected to rise by 5% next week.";
+            
+            // Optional: Make the AI talk back!
+            const synth = window.speechSynthesis;
+            const utterThis = new SpeechSynthesisUtterance(aiResponse.innerText);
+            synth.speak(utterThis);
+            
+        }, 1200);
+    };
+
+    recognition.onerror = () => {
+        pulse.classList.remove('pulsing');
+        statusText.innerText = "I didn't catch that. Try again!";
+    };
+
+} else {
+    statusText.innerText = "Speech not supported in this browser.";
+}
+</script>

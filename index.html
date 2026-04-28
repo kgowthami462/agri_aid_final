@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriAid — AI Farm Advisor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="hero-wrapper">
+        <nav class="navbar">
+            <div class="logo">AgriAid — AI Farm Advisor</div>
+            <div class="nav-links">
+                <a href="crop_doctor.html" target="_blank">Crop Doctor</a>
+                <a href="satellite.html" target="_blank">Satellite Advisor</a>
+                <a href="voice.html" target="_blank">Voice Assistant</a>
+                <a href="mandi.html" target="_blank">Mandi Optimizer</a>
+                <a href="pest_map.html" target="_blank">Pest Map</a>
+            </div>
+        </nav>
+
+        <main class="card-container">
+            
+            <a href="crop_doctor.html" target="_blank" class="card">
+                <div class="card-image" style="background-image: url(assets/crop_doctor.jpeg );"></div>
+                <div class="card-body">
+                    <h3>Crop Doctor</h3>
+                    <p>Upload a Leaf Photo – Diagnose Disease</p>
+                </div>
+            </a>
+
+            <a href="satellite.html" target="_blank" class="card">
+                <div class="card-image" style="background-image: url('assets/satellite.jpeg');"></div>
+                <div class="card-body">
+                    <h3>Satellite Advisor</h3>
+                    <p>Enter GPS – Get Satellite Crop Health Analysis</p>
+                </div>
+            </a>
+
+            <a href="voice.html" target="_blank" class="card">
+                <div class="card-image voice-bg">
+                    <img src="assets/voice.jpeg" alt="Voice" class="icon">
+                </div>
+                <div class="card-body">
+                    <h3>Voice Assistant</h3>
+                    <p>Ask a Question by Voice – Get Answers</p>
+                </div>
+            </a>
+
+            <a href="mandi.html" target="_blank" class="card">
+                <div class="card-image" style="background-image: url('assets/mandi.jpeg');"></div>
+                <div class="card-body">
+                    <h3>Mandi Optimizer</h3>
+                    <p>Predict Best Time to Sell Your Crop for ₹₹₹</p>
+                </div>
+            </a>
+
+            <a href="pest_map.html" target="_blank" class="card">
+                <div class="card-image" style="background-image: url('assets/pest.jpeg');"></div>
+                <div class="card-body">
+                    <h3>Pest Map</h3>
+                    <p>See upcoming Pest Outbreaks Near You</p>
+                </div>
+            </a>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-wrapper {
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url("assets/hero.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #0b240b; /* Very dark green from your image */
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.logo { font-size: 1.5rem; font-weight: bold; }
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.nav-links a:hover { border-bottom: 2px solid white; opacity: 1; }
+
+/* Card Layout */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.card {
+    background: white;
+    width: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    border: 2px solid #a3c18c; /* Light green border */
+    transition: transform 0.3s ease;
+}
+
+.card:hover { transform: translateY(-10px); }
+
+.card-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.voice-bg {
+    background-color: #588157;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon { width: 60px; filter: invert(1); }
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-body h3 {
+    color: #1a3d1a;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.card-body p {
+    color: #555;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+</style>
+<script
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            console.log(`Navigating to ${card.querySelector('h3').innerText}...`);
+            // You can add a sound effect or a page transition here
+        });
+    });
+});
+</script>
